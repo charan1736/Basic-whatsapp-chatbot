@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp Clone Using HTML & CSS </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+	
+      <header>
+	<a href="#" class="logo">Whatsapp</a>
+	<div class="action">
+		<a href="#" id="cameraIcon"><ion-icon name="camera-outline"></ion-icon></a> 
+		<a href="#"><ion-icon name="search-outline"></ion-icon></a>
+		<a href="#"><ion-icon name="ellipsis-vertical"></ion-icon></a>
+	</div>
+	</header>
+	<div class="tabs">
+		<input id="chats" type="radio" name="group" checked>
+		<input id="status" type="radio" name="group" >
+		<input id="calls" type="radio" name="group">
+		<div class="buttons">
+		<label for="chats">Chats</label>
+		<label for="status">Status</label>
+		<label for="calls">Calls</label>
+		<div class="underline"></div>
+	</div>
+	<div class="quickBtn">
+		<div class="btn message"><ion-icon name="chatbubble"></ion-icon></div>
+	</div>
+	<div class="content">
+		<div class="box chats">
+			<div class="data">
+				<div class="chatlist">
+					<div class="block unread open">
+						<div class="imgbx">
+							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3VXt28f4GIbY_7Ha944cesWstjap1XgXJJ9IvQrC6Q&s">
+						</div>
+						<div class="details">
+						<div class="listHead">
+							<h4>agent</h4>
+							<p class="time">10:56</p>
+						</div>
+						<div class="message_p">
+						<p>HOW TO MAKE WHATSAPP CLONE USING HTML AND CSS</p>
+						<b>1</b>
+							
+						</div>
+						</div>
+						</div>
+						</div>
+						</div>
+						</div>
+					<div class="box status">
+					<div class="data">
+					<div class="chatlist">
+					<div class="block">
+					<div class="imgbx">
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3VXt28f4GIbY_7Ha944cesWstjap1XgXJJ9IvQrC6Q&s">
+					</div>
+<div class="plus">+</div><div class="details">
+						<div class="listHead">
+							<h4>My Status</h4>
+						</div><div class="message_p"><p>Tap to add status update</p></div></div></div><label>Recent Updates</label></div></div></div></div>
+					<div class="box class">Calls</div>
+</div>
+<div class="chatBox">
+<div class="chat_header"><div class="imgcontent"><ion-icon name="arrow-back-sharp" class="back"></ion-icon><div class="imgBx"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3VXt28f4GIbY_7Ha944cesWstjap1XgXJJ9IvQrC6Q&s"></div> <h3>agent<br><span>online</span></div><div class="actionBtns"><a href="#" id="videoCallIcon"><ion-icon name="videocam"></ion-icon></a>
+<ion-icon name="call"></ion-icon><ion-icon name="ellipsis-vertical"></ion-icon></div></div>	
+<div class="messageBox">
+	<div class="message"> How to make whatsapp clone using html and css?<br><span class="time">10:19</span></div>
+	<div class="messageInput">
+		<div class="input">
+			<ion-icon name="happy-outline"></ion-icon>
+			<input type="text" placeholder="Message">
+			<ion-icon name="attach-outline" class="deg45"></ion-icon>
+			<a href="#" id="cameraIcon"><ion-icon name="camera"></ion-icon></a>
+		</div>
+		<div class="mic"><ion-icon name="mic"></ion-icon></div>
+	</div>
+	<video id="cameraFeed" autoplay></video>
+	
+        </div>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script momodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script>
+// Assuming you already have these elements in your HTML
+let back = document.querySelector('.back');
+let chatBox = document.querySelector('.chatBox');
+let open = document.querySelector('.open');
+let cameraIcon = document.getElementById('cameraIcon');
+let cameraFeed = document.getElementById('cameraFeed');
+let videoCallIcon = document.getElementById('videoCallIcon'); // Add this line
+
+
+
+// Create a variable to store the peer connection
+let peer;
+
+// Function to toggle chatBox visibility
+back.onclick = function () {
+    chatBox.classList.add('hide');
+    // Close the peer connection when hiding the chatBox
+    if (peer) {
+        peer.destroy();
+    }
+}
+
+open.onclick = function () {
+    chatBox.classList.remove('hide');
+}
+
+// Show/hide functionality for different tabs
+let chatsBtn = document.getElementById('chats');
+let statusBtn = document.getElementById('status');
+let callsBtn = document.getElementById('calls');
+
+chatsBtn.addEventListener('change', function () {
+    document.querySelector('.content').style.left = '0';
+    document.querySelector('.content .box.chats').style.display = 'block';
+    document.querySelector('.content .box.status').style.display = 'none';
+    document.querySelector('.content .box.calls').style.display = 'none';
+});
+
+statusBtn.addEventListener('change', function () {
+    document.querySelector('.content').style.left = '0';
+    document.querySelector('.content .box.chats').style.display = 'none';
+    document.querySelector('.content .box.status').style.display = 'block';
+    document.querySelector('.content .box.calls').style.display = 'none';
+});
+
+callsBtn.addEventListener('change', function () {
+    document.querySelector('.content').style.left = '0';
+    document.querySelector('.content .box.chats').style.display = 'none';
+    document.querySelector('.content .box.status').style.display = 'none';
+    document.querySelector('.content .box.calls').style.display = 'block';
+});
+
+// Add a click event listener to the camera icon
+cameraIcon.addEventListener('click', () => {
+    // Check if the browser supports WebRTC
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Request access to the user's camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                // Display the camera feed in the video element
+                cameraFeed.srcObject = stream;
+                chatBox.classList.remove('hide'); // Show chatBox when camera is opened
+            })
+            .catch((error) => {
+                console.error('Error accessing camera:', error);
+            });
+    } else {
+        console.error('WebRTC not supported in this browser');
+    }
+});
+
+// Add a click event listener to the video call icon
+videoCallIcon.addEventListener('click', () => {
+    // Check if the browser supports WebRTC
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Request access to the user's camera and microphone
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then((stream) => {
+                // Create a new peer connection
+                peer = new SimplePeer({ initiator: true, stream: stream });
+
+                // Handle the peer connection events
+                peer.on('signal', (data) => {
+                    // Send the signaling data to the other user (you need a signaling server for this)
+                    console.log('SIGNAL', JSON.stringify(data));
+                });
+
+                peer.on('stream', (remoteStream) => {
+                    // Display the remote stream in the video element
+                    cameraFeed.srcObject = remoteStream;
+                });
+
+                peer.on('close', () => {
+                    // Peer connection closed, clean up
+                    peer.destroy();
+                    cameraFeed.srcObject = null;
+                });
+            })
+            .catch((error) => {
+                console.error('Error accessing camera and microphone:', error);
+            });
+    } else {
+        console.error('WebRTC not supported in this browser');
+    }
+});
+
+
+</script>
+
+
+</body>
+</html>
